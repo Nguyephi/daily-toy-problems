@@ -32,7 +32,8 @@
 
   */
 
- function highestProductOf3(arrayOfInts) {
+// Long version
+function highestProductOf3(arrayOfInts) {
   if (arrayOfInts.length < 3) throw new Error;
 
   arrayOfInts.sort((a,b) => a - b);
@@ -99,3 +100,14 @@
 
   return highestSet > potential ? highestSet : potential;
 }
+
+// Short version
+
+function highestProductOf3(arrayOfInts) {
+  if (arrayOfInts.length < 3) throw new Error;
+  arrayOfInts.sort((a,b) => a - b);
+  const len = arrayOfInts.length;
+  const lastThree = arrayOfInts[len-1] * arrayOfInts[len-2] * arrayOfInts[len-3];
+  const firstTwoLastOne = arrayOfInts[0] * arrayOfInts[1] * arrayOfInts[len-1];
+  return Math.max(lastThree, firstTwoLastOne);
+  }
