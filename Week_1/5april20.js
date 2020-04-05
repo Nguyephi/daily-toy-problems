@@ -38,8 +38,7 @@ return bestMax
 */
 
 // function maxProfit(prices) {
-//   let tempMax = 0;
-//   let bestMax = 0;
+
 
 //   for (let i = 0; i < prices.length; i++) {
 //     let current = prices[i];
@@ -48,27 +47,45 @@ return bestMax
 
 //     if (current < nextPrice) {
 //       let profit = nextPrice - current
-//       tempMax = Math.max(tempMax + profit, profit);
-//       bestMax = Math.max(bestMax, tempMax);
+//       bestMax += profit
 //     }
 //   }
 
 //   return bestMax
 // }
 
-function maxProfit(prices) {
-  let maxProfit = 0
-  for (let i = 1; i < prices.length; i++) {
-    let current = prices[i];
-    let prev = prices[i-1];
+//leetcode solution
+// function maxProfit(prices) {
+//   let maxProfit = 0
+//   for (let i = 1; i < prices.length; i++) {
+//     if (prices[i] > prices[i-1]) {
+//       maxProfit += current - prev
+//     }
+//   }
+//   return maxProfit;
+// }
 
-    if (current > prev) {
-      maxProfit += current - prev
-    }
+// good time solution
+let maxProfit = (prices) => {
+  let min = prices[0];
+  let profit = 0;
+
+  for(let i = 1; i<prices.length; i++){
+      if(prices[i] < min)
+          min = prices[i];
+
+      if(prices[i] > min){
+          if(i + 1 == prices.length)
+              profit += prices[i] - min;
+          else if(prices[i+1] < prices[i]){
+              profit += prices[i] - min;
+              min = prices[i+1];
+          }
+      }
   }
 
-  return maxProfit;
-}
+  return profit;
+};
 
 
 let input1 = [7,6,4,3,1]
